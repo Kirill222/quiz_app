@@ -1,8 +1,10 @@
 import './App.css'
-import {useState} from 'react'
-import MainMenu from './#components/MainMenu';
-import Quiz from './#components/Quiz';
-import EndScreen from './#components/EndScreen';
+import {useState, useContext} from 'react'
+import MainMenu from './#components/MainMenu'
+import Quiz from './#components/Quiz'
+import EndScreen from './#components/EndScreen'
+
+import {QuizContext} from './#helpers/Contexts'
 
 function App() {
 
@@ -13,9 +15,11 @@ function App() {
     <div className="App">
       <h1>Hi</h1>
 
-      {gameState === 'menu' && <MainMenu />}
-      {gameState === 'quiz' && <Quiz />}
-      {gameState === 'endScreen' && <EndScreen />}
+      <QuizContext.Provider value={{gameState, setGameState}}>
+        {gameState === 'menu' && <MainMenu />}
+        {gameState === 'quiz' && <Quiz />}
+        {gameState === 'endScreen' && <EndScreen />}
+      </QuizContext.Provider>
 
     </div>
   );
